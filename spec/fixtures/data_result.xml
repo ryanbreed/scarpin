@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?RedSeal mediaType="application/x-RedSealv8.0+xml" ?>
+<?xml-stylesheet type="text/xsl" href="/style/directory.xsl" ?>
+<list>
+  <Link>
+    <Name>Access Analysis</Name>
+    <URL>https://spec_host/data/access</URL>
+  </Link>
+  <Link>
+    <Name>Analysis Results</Name>
+    <URL>https://spec_host/data/metrics</URL>
+  </Link>
+  <Link>
+    <Name>Computers</Name>
+    <URL>https://spec_host/data/computer</URL>
+  </Link>
+  <Link>
+    <Name>Data Collection</Name>
+    <URL>https://spec_host/data/import/task</URL>
+  </Link>
+  <Link>
+    <Name>Detailed Path Results</Name>
+    <URL>https://spec_host/data/path</URL>
+  </Link>
+  <Link>
+    <Name>Devices</Name>
+    <URL>https://spec_host/data/device</URL>
+  </Link>
+  <Link>
+    <Name>Groups</Name>
+    <URL>https://spec_host/data/group</URL>
+  </Link>
+  <Link>
+    <Name>Hosts</Name>
+    <URL>https://spec_host/data/host</URL>
+  </Link>
+  <Link>
+    <Name>Impact Analysis</Name>
+    <URL>https://spec_host/data/impact</URL>
+  </Link>
+  <Link>
+    <Name>Import</Name>
+    <URL>https://spec_host/data/import</URL>
+  </Link>
+  <Link>
+    <Name>Libraries</Name>
+    <URL>https://spec_host/data/library</URL>
+  </Link>
+  <Link>
+    <Name>Linked and Unlinked Unnumbered Interfaces</Name>
+    <URL>https://spec_host/data/addresses/linked</URL>
+  </Link>
+  <Link>
+    <Name>Nat IP Map</Name>
+    <URL>https://spec_host/data/addresses/nat</URL>
+  </Link>
+  <Link>
+    <Name>Policy</Name>
+    <URL>https://spec_host/data/policy</URL>
+  </Link>
+  <Link>
+    <Name>Reports</Name>
+    <URL>https://spec_host/data/report</URL>
+  </Link>
+  <Link>
+    <Name>Subnets</Name>
+    <URL>https://spec_host/data/subnet</URL>
+  </Link>
+  <Link>
+    <Name>System Status</Name>
+    <URL>https://spec_host/data/system</URL>
+  </Link>
+  <Link>
+    <Name>Threat Analysis</Name>
+    <URL>https://spec_host/data/threats</URL>
+  </Link>
+  <Link>
+    <Name>Threat Reference Library</Name>
+    <URL>https://spec_host/data/library/trl</URL>
+  </Link>
+  <Link>
+    <Name>Trusted IP Space</Name>
+    <URL>https://spec_host/data/addresses/trusted</URL>
+  </Link>
+  <Link>
+    <Name>Views</Name>
+    <URL>https://spec_host/data/view</URL>
+  </Link>
+  <Link>
+    <Name>Vulnerabilities</Name>
+    <URL>https://spec_host/data/top/vulns</URL>
+  </Link>
+</list>
