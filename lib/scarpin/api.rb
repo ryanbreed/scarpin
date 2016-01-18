@@ -31,7 +31,7 @@ module Scarpin
     end
 
     def parse(response)
-      Nokogiri::XML(response, nil, nil, xml_parse_options)
+      Nokogiri::XML(response, nil, nil, xml_parse_options).extend(Scarpin::XmlEntity)
     end
 
     def uri(path = 'data')

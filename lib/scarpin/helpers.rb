@@ -23,8 +23,11 @@ module Scarpin
     end
 
     def sanipath(*parts)
-      cleaned = parts.flat_map { |p| p.to_s.gsub(%r{(\A/|/\z)}, '').split('/') }
-      cleaned.reject { |c| c == '' || c.nil? }.join('/')
+      URI.parse(parts.join('/'))
+         .path
+         .split('/')
+         .reject { |c| c == '' || c.nil? }
+         .join('/')
     end
 
     def saniparts(*parts)

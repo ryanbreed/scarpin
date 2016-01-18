@@ -21,7 +21,7 @@ describe 'Scarpin::Api' do
     let(:data_result) { File.read('spec/fixtures/data_result.xml') }
     let(:parsed) { api.parse(data_result) }
     it 'returns a hash' do
-      expect(parsed).to be_a(Hash)
+      expect(parsed).to be_a(Nokogiri::XML::Document)
     end
   end
 
