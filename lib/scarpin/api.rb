@@ -13,8 +13,9 @@ module Scarpin
     end
 
     def build_request(path: 'data', payload: {}, method: :get)
+      requested_path = sanipath(*path)
       RestClient::Request.new(method: method,
-                              url: uri(path),
+                              url: uri(requested_path),
                               user: user,
                               password: pass,
                               read_timeout: 10,
@@ -26,35 +27,22 @@ module Scarpin
     def request(path: 'data', payload: {}, method: :get, return_raw: false)
       req = build_request(path: path, payload: payload, method: method)
       result = req.execute
-      return_raw ? result : result_list(parse(result))
+      return_raw ? result : parse(result)
     end
 
     def parse(response)
-      xml.parse(response)
+      Nokogiri::XML(response, nil, nil, xml_parse_options)
     end
 
     def uri(path = 'data')
       format('https://%s:%d/%s', host, port, URI.escape(path))
     end
 
-    def extract_result(result)
-      if result.keys.size == 1
-        result.fetch(result.keys[0])
-      else
-        result
-      end
+    private
+
+    def xml_parse_options
+      Nokogiri::XML::ParseOptions::NOBLANKS | Nokogiri::XML::ParseOptions::DEFAULT_XML
     end
 
-    def result_list(result)
-      data = extract_result(result)
-      case data
-      when Array
-        data.map { |datum| OpenStruct.new(datum) }
-      when Hash
-        [OpenStruct.new(data)]
-      else
-        []
-      end
-    end
   end
 end
