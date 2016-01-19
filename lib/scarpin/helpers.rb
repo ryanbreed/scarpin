@@ -23,7 +23,7 @@ module Scarpin
     end
 
     def sanipath(*parts)
-      URI.parse(parts.join('/'))
+      URI.parse(URI.escape(parts.join('/')))
          .path
          .split('/')
          .reject { |c| c == '' || c.nil? }
