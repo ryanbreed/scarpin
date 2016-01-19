@@ -31,7 +31,12 @@ module Scarpin
     end
 
     def parse(response)
-      Nokogiri::XML(response, nil, nil, xml_parse_options).extend(Scarpin::XmlEntity)
+      parsed = Nokogiri::XML(response, nil, nil, xml_parse_options).extend(Scarpin::XmlEntity)
+      if parsed.entity_type == 'list'
+        parsed.xpath('/list').children.map { |c| parse(c.to_xml) }
+      else
+        parsed
+      end
     end
 
     def uri(path = 'data')
