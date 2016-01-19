@@ -24,19 +24,26 @@ module Scarpin
                               headers: { accept: 'application/x-RedSealv8.0+xml' })
     end
 
-    def request(path: 'data', payload: {}, method: :get, return_raw: false)
-      req = build_request(path: path, payload: payload, method: method)
-      result = req.execute
-      return_raw ? result : parse(result)
+    def get(path='data/group/Topoplogy', parse: :as_hash)
+      request(path: path, method: :get, parse: parse)
     end
 
-    def parse(response)
-      parsed = Nokogiri::XML(response, nil, nil, xml_parse_options).extend(Scarpin::XmlEntity)
-      if parsed.entity_type == 'list'
-        parsed.xpath('/list').children.map { |c| parse(c.to_xml) }
+    def request(path: 'data', payload: {}, method: :get, parse: :as_hash)
+      req = build_request(path: path, payload: payload, method: method)
+      result = req.execute
+      if self.respond_to?(parse)
+        self.send(parse,result)
       else
-        parsed
+        result
       end
+    end
+
+    def as_hash(response)
+      xml.parse(response)
+    end
+
+    def as_xml(response)
+      Nokogiri::XML(response, nil, nil, xml_parse_options).extend(Scarpin::XmlEntity)
     end
 
     def uri(path = 'data')
