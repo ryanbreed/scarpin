@@ -11,6 +11,10 @@ require 'scarpin/api'
 require 'scarpin/xml_entity'
 require 'scarpin/type/group'
 require 'scarpin/type/subnet'
+require 'scarpin/type/host'
+require 'scarpin/type/device'
+require 'scarpin/type/interface'
+require 'scarpin/type/config'
 
 module Scarpin
   def self.configure(config_file = File.join(ENV['HOME'], '.scarpin.json'))

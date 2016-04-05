@@ -2,8 +2,9 @@ module Scarpin
   module Type
     class Subnet
       attr_reader :data, :api
-      def self.fetch(api,id)
-        Subnet.new(api.get(api.sanipath('data','subnet','id',id)),api)
+      def self.fetch(api, subnet_id)
+        target = ['data/subnet/id', subnet_id]
+        Subnet.new(api.get(target),api)
       end
 
       def initialize(hashdata,api)
@@ -40,6 +41,10 @@ module Scarpin
 
       def trust
         data.dig('Subnet','TrustLevel')
+      end
+
+      def description
+        data.dig('Subnet','Description')
       end
 
     end
