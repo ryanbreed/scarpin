@@ -2,7 +2,11 @@ module Scarpin
   module Trait
     module ContainsDevices
       def device_hashes
-        api.array_of(data.dig(root,'Devices','Device'))
+        if data.dig(root).key?('Computers')
+          computer_device_hashes
+        else
+          api.array_of(data.dig(root,'Devices','Device'))
+        end
       end
 
       def has_devices?

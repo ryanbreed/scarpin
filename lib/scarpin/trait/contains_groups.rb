@@ -19,7 +19,7 @@ module Scarpin
 
       def expand_groups
         if has_groups?
-          groups.flat_map {|subgroup| subgroup.expand_groups }
+          [self, groups.flat_map {|subgroup| subgroup.expand_groups }].flatten
         else
           self
         end
