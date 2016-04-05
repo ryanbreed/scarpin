@@ -1,6 +1,12 @@
 module Scarpin
   module Type
     class Host
+      ROOT = 'Host'
+
+      def root
+        ROOT
+      end
+
       attr_reader :data, :api
       def self.fetch(api, host_id)
         target=['data/host/id',host_id]
@@ -12,19 +18,19 @@ module Scarpin
       end
 
       def id
-        data.dig('Host','TreeId')
+        data.dig(root,'TreeId')
       end
 
       def url
-        data.dig('Host','URL')
+        data.dig(root,'URL')
       end
 
       def name
-        data.dig('Host','Name')
+        data.dig(root,'Name')
       end
 
       def interface_hashes
-        @interface_hashes ||= api.array_of(data.dig('Host','Interfaces','Interface'))
+        @interface_hashes ||= api.array_of(data.dig(root,'Interfaces','Interface'))
       end
 
       def interface_addresses
@@ -36,7 +42,7 @@ module Scarpin
       end
 
       def operating_system
-        data.dig('Host','OperatingSystem')
+        data.dig(root,'OperatingSystem')
       end
 
       def os
@@ -44,15 +50,15 @@ module Scarpin
       end
 
       def os_version
-        data.dig('Host','OSVersion')
+        data.dig(root,'OSVersion')
       end
 
       def os_vendor
-        data.dig('Host','OSVendor')
+        data.dig(root,'OSVendor')
       end
 
       def type
-        data.dig('Host','Type')
+        data.dig(root,'Type')
       end
     end
   end

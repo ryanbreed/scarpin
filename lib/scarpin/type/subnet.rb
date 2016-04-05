@@ -1,7 +1,14 @@
 module Scarpin
   module Type
     class Subnet
+      ROOT = 'Subnet'
+
+      def root
+        ROOT
+      end
+
       attr_reader :data, :api
+
       def self.fetch(api, subnet_id)
         target = ['data/subnet/id', subnet_id]
         Subnet.new(api.get(target),api)
@@ -12,39 +19,55 @@ module Scarpin
       end
 
       def id
-        data.dig('Subnet','ID')
+        data.dig(root,'ID')
       end
 
       def wireless
-        data.dig('Subnet','Wireless')
+        data.dig(root,'Wireless')
       end
 
       def unnumbered?
-        data.dig('Subnet','Unnumbered')
+        data.dig(root,'Unnumbered')
       end
 
       def mask
-        data.dig('Subnet','Mask')
+        data.dig(root,'Mask')
       end
 
       def url
-        data.dig('Subnet','URL')
+        data.dig(root,'URL')
       end
 
       def name
-        data.dig('Subnet','Name')
+        data.dig(root,'Name')
       end
 
       def cidr
-        data.dig('Subnet','CIDR')
+        data.dig(root,'CIDR')
       end
 
       def trust
-        data.dig('Subnet','TrustLevel')
+        data.dig(root,'TrustLevel')
       end
 
       def description
-        data.dig('Subnet','Description')
+        data.dig(root,'Description')
+      end
+
+      def device_hashes
+        api.array_of(data.dig(root,'Devices','Device'))
+      end
+
+      def devices
+        device_hashes.map {|dev| Scarpin::Type::Device.fetch(api, dev['TreeId'])}
+      end
+
+      def host_hashes
+        api.array_of(data.dig(root,'Hosts','Host'))
+      end
+
+      def hosts
+        host_hashes.map {|host| Scarpin::Type::Host.fetch(api, host['TreeId'])}
       end
 
     end

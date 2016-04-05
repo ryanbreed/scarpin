@@ -1,6 +1,11 @@
 module Scarpin
   module Type
     class Interface
+      ROOT = 'Interface'
+      def root
+        ROOT
+      end
+
       attr_reader :data, :api
       def self.fetch(api, host_id, interface_name)
         target=['data','computer','id',host_id,'interface',interface_name]
@@ -12,7 +17,7 @@ module Scarpin
       end
 
       def id
-        data.dig('Interface','ID')
+        data.dig(root,'ID')
       end
 
       def host_id
@@ -24,31 +29,31 @@ module Scarpin
       end
 
       def url
-        data.dig('Interface','URL')
+        data.dig(root,'URL')
       end
 
       def name
-        data.dig('Interface','Name')
+        data.dig(root,'Name')
       end
 
       def address
-        data.dig('Interface','Address')
+        data.dig(root,'Address')
       end
 
       def mask
-        data.dig('Interface','Mask')
+        data.dig(root,'Mask')
       end
 
       def vrf
-        data.dig('Interface','VRF')
+        data.dig(root,'VRF')
       end
 
       def comments
-        data.dig('Interface','Comments')
+        data.dig(root,'Comments')
       end
 
       def subnet
-        Scarpin::Type::Subnet.fetch(api,data.dig('Interface','Subnet','ID'))
+        Scarpin::Type::Subnet.fetch(api,data.dig(root,'Subnet','ID'))
       end
 
     end

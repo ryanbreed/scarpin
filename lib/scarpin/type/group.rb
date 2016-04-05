@@ -1,6 +1,11 @@
 module Scarpin
   module Type
     class Group
+      ROOT = 'FullGroup'
+      def root
+        ROOT
+      end
+      
       attr_reader :data, :api
       def self.fetch(api,path='data/group/Topology')
         Group.new(api.get(path),api)

@@ -1,6 +1,12 @@
 module Scarpin
   module Type
     class Device
+      ROOT = 'Device'
+
+      def root
+        ROOT
+      end
+
       attr_reader :data, :api
       def self.fetch(api,id)
         target = ['data/device/id',id]
@@ -12,7 +18,7 @@ module Scarpin
       end
 
       def config_hashes
-        @config_hashes ||= api.array_of(data.dig('Device','Configuration'))
+        @config_hashes ||= api.array_of(data.dig(root,'Configuration'))
       end
 
       def config_filenames
@@ -24,7 +30,7 @@ module Scarpin
       end
 
       def interface_hashes
-        @interface_hashes ||= api.array_of(data.dig('Device','Interfaces','Interface'))
+        @interface_hashes ||= api.array_of(data.dig(root,'Interfaces','Interface'))
       end
 
       def interface_addresses
@@ -36,19 +42,19 @@ module Scarpin
       end
 
       def id
-        data.dig('Device','TreeId')
+        data.dig(root,'TreeId')
       end
 
       def url
-        data.dig('Device','URL')
+        data.dig(root,'URL')
       end
 
       def name
-        data.dig('Device','Name')
+        data.dig(root,'Name')
       end
 
       def operating_system
-        data.dig('Device','OperatingSystem')
+        data.dig(root,'OperatingSystem')
       end
 
       def os
@@ -56,7 +62,7 @@ module Scarpin
       end
 
       def primary_capability
-        data.dig('Device','PrimaryCapability')
+        data.dig(root,'PrimaryCapability')
       end
 
       def type
