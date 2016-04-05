@@ -1,5 +1,5 @@
 module Scarpin
-  module Type
+  module Resource
     class Config
       ROOT = 'Configuration'
       def root

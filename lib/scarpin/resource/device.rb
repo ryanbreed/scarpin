@@ -1,5 +1,5 @@
 module Scarpin
-  module Type
+  module Resource
     class Device
       ROOT = 'Device'
 
@@ -8,6 +8,9 @@ module Scarpin
       end
 
       attr_reader :data, :api
+
+      include Scarpin::Trait::ContainsInterfaces
+      
       def self.fetch(api,id)
         target = ['data/device/id',id]
         Device.new(api.get(target),api)
@@ -26,19 +29,7 @@ module Scarpin
       end
 
       def configs
-        config_filenames.map {|fname| Scarpin::Type::Config.fetch(api,self.id,fname)}
-      end
-
-      def interface_hashes
-        @interface_hashes ||= api.array_of(data.dig(root,'Interfaces','Interface'))
-      end
-
-      def interface_addresses
-        interface_hashes.map {|intf| intf['Address']}.sort.uniq
-      end
-
-      def interfaces
-        interface_addresses.map {|addr| Scarpin::Type::Interface.fetch(api, self.id, addr) }
+        config_filenames.map {|fname| Scarpin::Resource::Config.fetch(api,self.id,fname)}
       end
 
       def id

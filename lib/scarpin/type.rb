@@ -1,1 +1,0 @@
-require 'scarpin/type/group'

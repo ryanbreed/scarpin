@@ -1,5 +1,5 @@
 module Scarpin
-  module Type
+  module Resource
     class Host
       ROOT = 'Host'
 
@@ -8,6 +8,9 @@ module Scarpin
       end
 
       attr_reader :data, :api
+
+      include Scarpin::Trait::ContainsInterfaces
+
       def self.fetch(api, host_id)
         target=['data/host/id',host_id]
         Host.new(api.get(target),api)
@@ -27,18 +30,6 @@ module Scarpin
 
       def name
         data.dig(root,'Name')
-      end
-
-      def interface_hashes
-        @interface_hashes ||= api.array_of(data.dig(root,'Interfaces','Interface'))
-      end
-
-      def interface_addresses
-        interface_hashes.map {|h| h['Address']}.sort.uniq
-      end
-
-      def interfaces
-        interface_addresses.map {|addr| Scarpin::Type::Interface.fetch(api, self.id, addr) }
       end
 
       def operating_system

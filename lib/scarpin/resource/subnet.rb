@@ -1,5 +1,5 @@
 module Scarpin
-  module Type
+  module Resource
     class Subnet
       ROOT = 'Subnet'
 
@@ -8,6 +8,9 @@ module Scarpin
       end
 
       attr_reader :data, :api
+
+      include Scarpin::Trait::ContainsHosts,
+              Scarpin::Trait::ContainsDevices
 
       def self.fetch(api, subnet_id)
         target = ['data/subnet/id', subnet_id]
@@ -52,22 +55,6 @@ module Scarpin
 
       def description
         data.dig(root,'Description')
-      end
-
-      def device_hashes
-        api.array_of(data.dig(root,'Devices','Device'))
-      end
-
-      def devices
-        device_hashes.map {|dev| Scarpin::Type::Device.fetch(api, dev['TreeId'])}
-      end
-
-      def host_hashes
-        api.array_of(data.dig(root,'Hosts','Host'))
-      end
-
-      def hosts
-        host_hashes.map {|host| Scarpin::Type::Host.fetch(api, host['TreeId'])}
       end
 
     end

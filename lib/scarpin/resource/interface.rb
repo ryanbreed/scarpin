@@ -1,5 +1,5 @@
 module Scarpin
-  module Type
+  module Resource
     class Interface
       ROOT = 'Interface'
       def root
@@ -25,7 +25,7 @@ module Scarpin
       end
 
       def host
-        @host ||= Scarpin::Type::Host.fetch(api,host_id)
+        @host ||= Scarpin::Resource::Host.fetch(api,host_id)
       end
 
       def url
@@ -53,7 +53,7 @@ module Scarpin
       end
 
       def subnet
-        Scarpin::Type::Subnet.fetch(api,data.dig(root,'Subnet','ID'))
+        Scarpin::Resource::Subnet.fetch(api,data.dig(root,'Subnet','ID'))
       end
 
     end

@@ -26,8 +26,7 @@ module Scarpin
       base_parts = parts.flat_map {|p| p.split('/')}
       escaped_parts = base_parts.map {|p| CGI.escape(p)}
       path_part = URI.parse(escaped_parts.join('/')).path
-      path_components = path_part.split('/')
-      cleaned_path = path_components.join('/')
+      cleaned_path = path_part.split('/').reject(&:empty?).join('/')
       cleaned_path
     end
 
