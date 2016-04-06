@@ -17,6 +17,10 @@ module Scarpin
         api.array_of( api.get('data/view').dig('list','View') )
       end
 
+      def self.list_names(api)
+        list(api).map {|vh| vh['Name']}
+      end
+
       def initialize(hashdata,api)
         @data,@api=hashdata,api
       end
