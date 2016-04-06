@@ -1,8 +1,6 @@
-# Scarpin
+# The Scarlet Pinniped
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/scarpin`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This is a wrapper for the [RedSeal](http://redseal.co) API. Currently can unmarshal some resources.
 
 ## Installation
 
@@ -22,7 +20,16 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Configuration file goes in $HOME/.scarpin.json.
+
+```ruby
+redseal = Scarpin.configure('/path/to/config.json')
+```
+
+most resources are fetched like so:
+```ruby
+subnet = Scarpin::Resouce::Subnet.fetch(redseal, id)
+```
 
 ## Development
 
@@ -38,4 +45,3 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/[USERN
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-

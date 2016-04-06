@@ -17,9 +17,13 @@ module Scarpin
         group_paths.map {|path| Scarpin::Resource::Group.fetch(api, path)}
       end
 
-      def expand_groups
+      def expand(full: true)
         if has_groups?
-          [self, groups.flat_map {|subgroup| subgroup.expand_groups }].flatten
+          if full # include ourself in the expanded list
+            [self, groups.flat_map {|subgroup| subgroup.expand(full: full) }].flatten
+          else
+            groups.flat_map {|subgroup| subgroup.expand(full: full) }
+          end
         else
           self
         end

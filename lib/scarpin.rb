@@ -21,6 +21,7 @@ require 'scarpin/resource/host'
 require 'scarpin/resource/device'
 require 'scarpin/resource/interface'
 require 'scarpin/resource/config'
+require 'scarpin/resource/view'
 
 module Scarpin
   def self.configure(config_file = File.join(ENV['HOME'], '.scarpin.json'))
