@@ -16,6 +16,10 @@ module Scarpin
         Host.new(api.get(target),api)
       end
 
+      def self.all(api)
+        Scarpin::Resource::Group.fetch(api,'data/group/Primary Capability/Host')
+      end
+
       def initialize(hashdata,api)
         @data,@api=hashdata,api
       end
