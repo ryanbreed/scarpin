@@ -23,7 +23,11 @@ module Scarpin
       end
 
       def path
-        api.sanipath('data','group',CGI.unescape(data.dig(root,'Path')))
+        CGI.unescape(data.dig(root,'Path'))
+      end
+
+      def full_path
+        api.sanipath('data','group',path)
       end
 
       def url
