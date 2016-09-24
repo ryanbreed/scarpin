@@ -2,7 +2,12 @@ module Scarpin
   module Trait
     module ContainsGroups
       def group_hashes
-        api.array_of(data.dig(root,'Groups','Group'))
+        case data.keys
+          when ["list"]
+            data.dig('list','Group')
+          else
+            api.array_of(data.dig(root,'Groups','Group'))
+        end
       end
 
       def has_groups?
